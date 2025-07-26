@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 
 // Define types
-export type TemplateType = "template-a" | "template-b" | "template-c" | "template-d" | null;
+export type TemplateType = "template-a" | "template-b" | null;
 
 interface PortfolioContextType {
   selectedTemplate: TemplateType;

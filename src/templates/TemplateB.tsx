@@ -1,130 +1,119 @@
+// src/templates/TemplateB.tsx
 export default function TemplateB({ data }: { data: any }) {
   return (
-    <div className="w-full flex justify-center items-center print:bg-white">
-      <div
-        className="bg-white text-gray-900 shadow-md print:shadow-none"
-        style={{
-          width: "794px", // A4 width at 96 DPI
-          height: "1123px", // A4 height at 96 DPI
-          padding: "32px",
-          boxSizing: "border-box",
-          display: "flex",
-          flexDirection: "column",
-          fontSize: "12px",
-        }}
-      >
-        <div className="flex flex-col md:flex-row gap-6 h-full">
-          {/* Sidebar */}
-          <aside className="w-full md:w-1/3 bg-gray-800 text-white p-4 rounded-md print:rounded-none">
-            {data.profileImage && (
-              <img
-                src={data.profileImage}
-                alt="Profile"
-                className="w-28 h-28 object-cover rounded-full border-2 border-white mx-auto mb-4"
-              />
-            )}
-            <div className="text-center mb-4">
-              <h1 className="text-xl font-bold">{data.name}</h1>
-              <p className="text-sm">{data.title}</p>
-              <p className="text-xs italic text-gray-300">{data.tagline}</p>
-            </div>
-
-            <div className="text-sm mb-4">
-              <h3 className="font-semibold text-gray-300">Contact</h3>
-              <p>Email: {data.email}</p>
-              <p>Phone: {data.phone}</p>
-              <p>Location: {data.location}</p>
-            </div>
-
-            <div className="text-sm mb-4">
-              <h3 className="font-semibold text-gray-300">Socials</h3>
-              <p>LinkedIn: {data.linkedin}</p>
-              <p>GitHub: {data.github}</p>
-              <p>Twitter: {data.twitter}</p>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-300 mb-1">Skills</h3>
-              <div className="flex flex-wrap gap-1">
-                {data.skills?.map((s: any) => (
-                  <span
-                    key={s.value}
-                    className="bg-gray-700 text-xs px-2 py-1 rounded"
-                  >
-                    {s.label}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </aside>
-
-          {/* Main */}
-          <main className="w-full md:w-2/3 text-sm overflow-y-auto space-y-4 pr-2">
-            <section>
-              <h2 className="text-base font-semibold border-b border-gray-300 mb-1">About Me</h2>
-              <p>{data.bio}</p>
-            </section>
-
-            {data.services?.length > 0 && (
-              <section>
-                <h2 className="text-base font-semibold border-b border-gray-300 mb-1">Services</h2>
-                <ul className="space-y-1">
-                  {data.services.map((s: any, i: number) => (
-                    <li key={i}>
-                      <p className="font-medium">{s.title}</p>
-                      <p className="text-gray-700">{s.description}</p>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            {data.projects?.length > 0 && (
-              <section>
-                <h2 className="text-base font-semibold border-b border-gray-300 mb-1">Portfolio</h2>
-                <ul className="space-y-1">
-                  {data.projects.map((p: any, i: number) => (
-                    <li key={i}>
-                      <p className="font-medium">{p.title}</p>
-                      <p className="text-gray-700">{p.description}</p>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            {data.testimonials?.length > 0 && (
-              <section>
-                <h2 className="text-base font-semibold border-b border-gray-300 mb-1">Testimonials</h2>
-                <ul className="space-y-1">
-                  {data.testimonials.map((t: any, i: number) => (
-                    <li key={i}>
-                      <blockquote className="italic text-gray-700">"{t.quote}"</blockquote>
-                      <p className="text-gray-500">— {t.name}</p>
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
-
-            {(data.blogTitle || data.blogSummary) && (
-              <section>
-                <h2 className="text-base font-semibold border-b border-gray-300 mb-1">Blog</h2>
-                <p className="font-medium">{data.blogTitle}</p>
-                <p className="text-gray-700">{data.blogSummary}</p>
-              </section>
-            )}
-
-            <section>
-              <h2 className="text-base font-semibold border-b border-gray-300 mb-1">Contact Message</h2>
-              <p>{data.message}</p>
-              <p className="mt-1">
-                Email: {data.contactEmail} | Phone: {data.contactPhone}
-              </p>
-            </section>
-          </main>
+    <div className="bg-gradient-to-br from-gray-900 to-gray-950 text-white min-h-screen w-full font-sans">
+      {/* Hero */}
+      <section className="text-center py-16 px-4">
+        <div className="max-w-5xl mx-auto">
+          {data.profileImage && (
+            <img
+              src={data.profileImage}
+              alt="Profile"
+              className="w-32 h-32 mx-auto rounded-full object-cover border-4 border-white mb-6"
+            />
+          )}
+          <h1 className="text-4xl font-bold">{data.name}</h1>
+          <p className="text-xl text-blue-400">{data.title}</p>
+          <p className="text-gray-400 italic mt-2">{data.tagline}</p>
         </div>
-      </div>
+      </section>
+
+      {/* About */}
+      <section className="py-10 px-6 max-w-5xl mx-auto">
+        <h2 className="text-2xl font-semibold text-blue-400 mb-4">About Me</h2>
+        <p className="text-gray-300 mb-6">{data.bio}</p>
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 text-sm text-gray-400">
+          <p><strong>Email:</strong> {data.email}</p>
+          <p><strong>Phone:</strong> {data.phone}</p>
+          <p><strong>Location:</strong> {data.location}</p>
+          <p><strong>LinkedIn:</strong> {data.linkedin}</p>
+          <p><strong>GitHub:</strong> {data.github}</p>
+          <p><strong>Twitter:</strong> {data.twitter}</p>
+        </div>
+      </section>
+
+      {/* Skills */}
+      {data.skills?.length > 0 && (
+        <section className="py-10 px-6 max-w-5xl mx-auto">
+          <h2 className="text-2xl font-semibold text-blue-400 mb-4">Skills</h2>
+          <div className="flex flex-wrap gap-3">
+            {data.skills.map((s: any) => (
+              <span
+                key={s.value}
+                className="bg-blue-700/80 text-white px-3 py-1 rounded-full text-sm"
+              >
+                {s.label}
+              </span>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Services */}
+      {data.services?.length > 0 && (
+        <section className="py-10 px-6 max-w-5xl mx-auto">
+          <h2 className="text-2xl font-semibold text-blue-400 mb-4">Services</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            {data.services.map((s: any, i: number) => (
+              <div key={i} className="bg-gray-800/50 rounded-lg p-4 shadow">
+                <h3 className="font-semibold text-lg text-white">{s.title}</h3>
+                <p className="text-gray-400 text-sm mt-1">{s.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Projects */}
+      {data.projects?.length > 0 && (
+        <section className="py-10 px-6 max-w-5xl mx-auto">
+          <h2 className="text-2xl font-semibold text-blue-400 mb-4">Projects</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            {data.projects.map((p: any, i: number) => (
+              <div key={i} className="bg-gray-800/50 rounded-lg p-4 shadow">
+                <h3 className="font-semibold text-white">{p.title}</h3>
+                <p className="text-gray-400 text-sm">{p.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Testimonials */}
+      {data.testimonials?.length > 0 && (
+        <section className="py-10 px-6 max-w-5xl mx-auto">
+          <h2 className="text-2xl font-semibold text-blue-400 mb-4">Testimonials</h2>
+          <div className="space-y-4">
+            {data.testimonials.map((t: any, i: number) => (
+              <div key={i} className="bg-gray-800/50 rounded p-4 shadow">
+                <blockquote className="italic text-gray-300">"{t.quote}"</blockquote>
+                <p className="text-sm text-blue-300 mt-2">— {t.name}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Blog */}
+      {(data.blogTitle || data.blogSummary) && (
+        <section className="py-10 px-6 max-w-5xl mx-auto">
+          <h2 className="text-2xl font-semibold text-blue-400 mb-4">Blog</h2>
+          <p className="text-lg font-semibold text-white">{data.blogTitle}</p>
+          <p className="text-sm text-gray-400">{data.blogSummary}</p>
+        </section>
+      )}
+
+      {/* Contact */}
+      <section className="py-10 px-6 max-w-5xl mx-auto">
+        <h2 className="text-2xl font-semibold text-blue-400 mb-4">Contact</h2>
+        <p className="text-sm text-gray-300"><strong>Message:</strong> {data.message}</p>
+        <p className="text-sm text-gray-300 mt-1"><strong>Email:</strong> {data.contactEmail}</p>
+        <p className="text-sm text-gray-300"><strong>Phone:</strong> {data.contactPhone}</p>
+      </section>
+
+      <footer className="text-center py-6 text-xs text-gray-500 border-t border-gray-800 mt-10">
+        © {new Date().getFullYear()} {data.name} • All rights reserved
+      </footer>
     </div>
   );
 }

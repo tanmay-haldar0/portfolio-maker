@@ -4,15 +4,13 @@ import { usePortfolioContext } from "../context/PortfolioContext";
 // Import images
 import templateA from "../assets/Template-A.png";
 import templateB from "../assets/Template-B.png";
-import templateC from "../assets/Template-C.png";
-import templateD from "../assets/Template-D.png";
 
 export default function Home() {
   const { setSelectedTemplate } = usePortfolioContext();
   const navigate = useNavigate();
 
   const handleSelect = (
-    template: "template-a" | "template-b" | "template-c" | "template-d"
+    template: "template-a" | "template-b"
   ) => {
     setSelectedTemplate(template);
     navigate("/create");
@@ -35,16 +33,6 @@ export default function Home() {
           title="Template B"
           image={templateB}
           onClick={() => handleSelect("template-b")}
-        />
-        <TemplateCard
-          title="Template C"
-          image={templateC}
-          onClick={() => handleSelect("template-c")}
-        />
-        <TemplateCard
-          title="Template D"
-          image={templateD}
-          onClick={() => handleSelect("template-d")}
         />
       </div>
     </div>

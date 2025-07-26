@@ -84,6 +84,8 @@ export default function FormPage() {
   const [currentStep, setCurrentStep] = useState(0);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const { selectedTemplate } = usePortfolioContext();
+  const isSubmittingRef = useRef(false); // 💡 guard to prevent double submission
+
 
   const initialValues = {
     // Hero
@@ -128,6 +130,7 @@ export default function FormPage() {
 
 
 
+
   const handleImageChange = (e: any, setFieldValue: any) => {
     const file = e.target.files?.[0];
     if (file) {
@@ -142,12 +145,40 @@ export default function FormPage() {
   };
 
 
+  const getOrCreatePortfolioId = (): string => {
+    const existingId = localStorage.getItem("portfolio_id");
+    if (existingId) return existingId;
+
+    const newId = generateId();
+    localStorage.setItem("portfolio_id", newId);
+    return newId;
+  };
+
+
+
   const handleSubmit = (values: any) => {
-  const id = generateId();
-  saveToLocal(`portfolio_${id}`, values);
-  localStorage.setItem("selected_template", selectedTemplate!);// in case it's used in preview/portfolio
-  navigate(`/preview/${id}`);
+  if (isSubmittingRef.current) return; // 💡 prevent double submit
+  isSubmittingRef.current = true;
+
+  const newId = generateId();
+
+  saveToLocal(`portfolio_${newId}`, values);
+  localStorage.setItem("portfolio_id", newId);
+  localStorage.setItem("selected_template", selectedTemplate!);
+
+  // Optional cleanup
+  localStorage.removeItem("portfolio_draft");
+  localStorage.removeItem("portfolio_step");
+
+  // Navigate after short delay to ensure localStorage write completes
+  setTimeout(() => {
+    navigate(`/`);
+  }, 200);
 };
+
+
+
+
 
 
   return (
